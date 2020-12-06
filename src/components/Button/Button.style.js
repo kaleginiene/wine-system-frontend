@@ -14,6 +14,13 @@ export const Button = styled.button`
   float: right;
   text-transform: uppercase;
   margin: 1em 0;
+  width: ${(props) => {
+    if (props.width) {
+      return props.width;
+    } else {
+      return "none";
+    }
+  }};
   &:hover {
     background: ${(props) =>
       props.color === "primary"

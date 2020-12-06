@@ -47,6 +47,9 @@ export const Select = styled.select`
   border-radius: 5px;
   padding: 0.685em;
   margin: 0.2em 0 1em;
+  @media only screen and (max-width: 691px) {
+    max-width: 100%;
+  }
 `;
 export const Radio = styled.input`
   width: 15px;

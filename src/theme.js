@@ -10,7 +10,7 @@ const theme = {
     height: "2.5em",
   },
   secondary: {
-    background: "#eeeeee",
+    background: "#EAF1F7",
     hover: {
       background: "e8e8e8",
     },
