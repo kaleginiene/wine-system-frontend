@@ -5,7 +5,7 @@ import { InputField, Button } from "../../components";
 import * as S from "./StockUp.style";
 
 function increase(quantity, id, setNotification, history) {
-  fetch("http://localhost:8080/quantity", {
+  fetch("http://89.40.0.145:8080/quantity", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function StockUp() {
   const [notification, setNotification] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:8080/wine-list", {
+    fetch("http://89.40.0.145:8080/wine-list", {
       headers: {
         Authorization: `Bearer ${auth.token}`,
       },

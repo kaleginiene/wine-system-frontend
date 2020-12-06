@@ -14,7 +14,7 @@ function insertWine(
   setNotification,
   history
 ) {
-  fetch("http://localhost:8080/add-wine", {
+  fetch("http://89.40.0.145:8080/add-wine", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import * as S from "./Login.style";
 
 function loginUser(username, password, auth) {
-  fetch("http://localhost:8080/login", {
+  fetch("http://89.40.0.145:8080/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
