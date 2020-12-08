@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Section, InputField, Button } from "../../components";
 import * as S from "./Register.style";
 
-function registerUser(username, password, auth, history, setNotification) {
-  fetch("http://89.40.0.145:8080//register", {
+function registerUser(username, password, history, setNotification) {
+  fetch("http://89.40.0.145:8080/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -14,26 +13,20 @@ function registerUser(username, password, auth, history, setNotification) {
   })
     .then((res) => res.json())
     .then((data) => {
-      auth.updateToken("Bearer" + data.token);
-    })
-    .then((data) => {
-      console.log(data);
-      if (data.msg === "User has been registered successfully.") {
-        history.push("/");
+      if (data.msg === "User has been succesfully registered.") {
+        history.push("/login");
       } else {
-        return setNotification(data.msg || "Error");
+        setNotification(data.msg);
       }
     })
-    .catch((err) => setNotification(err.message));
+    .catch((err) => console.log(err));
 }
 
 function Register() {
-  const auth = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
   const [notification, setNotification] = useState();
-  console.log(notification);
 
   return (
     <S.Main>
@@ -41,10 +34,11 @@ function Register() {
         <S.Form
           onSubmit={(e) => {
             e.preventDefault();
-            registerUser(username, password, auth, history, setNotification);
+            registerUser(username, password, history, setNotification);
           }}
         >
           <S.Title>Register</S.Title>
+          <h2>{notification}</h2>
 
           <InputField
             type="email"

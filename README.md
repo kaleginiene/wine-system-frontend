@@ -1,3 +1,25 @@
+<h1>:grapes: This is a simple Wine-stock system</h1>
+
+### About the project
+
+In this system you can:
+
+- create user;
+- see your Wine List and quantity;
+- filter your list by wine color;
+- add or remove wines;
+- stock-up a wine from your wine list.
+
+You can try this system with user:
+email: demouser@email.com
+password: demouser123
+
+### Additional tech info
+
+-For authentification I used JWT - https://jwt.io/#libraries-io.
+-Mysql database was used for data warehousing.
+-Backend server was created with node.js Express framework.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
