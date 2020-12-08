@@ -18,8 +18,7 @@ function registerUser(username, password, history, setNotification) {
       } else {
         setNotification(data.msg);
       }
-    })
-    .catch((err) => console.log(err));
+    });
 }
 
 function Register() {
