@@ -4,12 +4,15 @@ import { Section, InputField, Button } from "../../components";
 import * as S from "./Register.style";
 
 function registerUser(username, password, history, setNotification) {
-  fetch("http://89.40.0.145:8080/register", {
+  fetch(`http://89.40.0.145:8080/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({
+      username: username,
+      password: password,
+    }),
   })
     .then((res) => res.json())
     .then((data) => {
@@ -18,7 +21,8 @@ function registerUser(username, password, history, setNotification) {
       } else {
         setNotification(data.msg);
       }
-    });
+    })
+    .catch((err) => console.log(err));
 }
 
 function Register() {
