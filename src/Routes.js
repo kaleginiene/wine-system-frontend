@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
-import { Header, Footer } from "./components";
+import { Header, Footer, PrivateRoute } from "./components";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Register = lazy(() => import("./pages/Register/Register"));
@@ -21,9 +21,24 @@ function Routes() {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/" component={WineList} />
-          <Route exact path="/add-wine" component={AddWine} />
-          <Route exact path="/stock-up" component={StockUp} />
+          <PrivateRoute
+            exact
+            path="/"
+            component={WineList}
+            redirectPath="/login"
+          />
+          <PrivateRoute
+            exact
+            path="/add-wine"
+            component={AddWine}
+            redirectPath="/login"
+          />
+          <PrivateRoute
+            exact
+            path="/stock-up"
+            component={StockUp}
+            redirectPath="/login"
+          />
         </Switch>
       </Suspense>
       <Footer />
