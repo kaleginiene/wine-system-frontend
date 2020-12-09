@@ -4,7 +4,7 @@ import { Section, InputField, Button } from "../../components";
 import { AuthContext } from "../../context/AuthContext";
 import * as S from "./Login.style";
 
-function loginUser(username, password, auth) {
+function loginUser(username, password, auth, history, setNotification) {
   fetch("http://89.40.0.145:8080/login", {
     method: "POST",
     headers: {
@@ -12,20 +12,22 @@ function loginUser(username, password, auth) {
     },
     body: JSON.stringify({ username, password }),
   })
-    .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-      auth.updateToken(data.token);
+      auth.updateToken("Bearer" + data.token);
+      if (data.msg === "Logged in") {
+        history.push("/");
+      } else {
+        return setNotification(data.msg || "Error");
+      }
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((err) => setNotification(err.message));
 }
 
 function Login() {
   const auth = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [notification, setNotification] = useState();
   const history = useHistory();
 
   return (
@@ -34,11 +36,12 @@ function Login() {
         <S.Form
           onSubmit={(e) => {
             e.preventDefault();
-            loginUser(username, password, auth);
+            loginUser(username, password, auth, history, setNotification);
             history.push("/");
           }}
         >
           <S.Title>Login</S.Title>
+          <h2>{notification}</h2>
           <InputField
             type="email"
             placeholder="E.g. email@email.com"
