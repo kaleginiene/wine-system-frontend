@@ -18,7 +18,7 @@ function insertWine(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${auth.token}`,
+      Authorization: `${auth.token}`,
     },
     body: JSON.stringify({ name, region, type, year, quantity }),
   })
