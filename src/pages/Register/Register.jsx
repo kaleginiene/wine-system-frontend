@@ -1,31 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import { Section, InputField, Button } from "../../components";
 import * as S from "./Register.style";
 
-function registerUser(username, password, history, setNotification) {
-  fetch(`http://89.40.0.145:8080/register`, {
+function registerUser(username, password, auth, history, setNotification) {
+  fetch("http://89.40.0.145:8080/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
+    body: JSON.stringify({ username, password }),
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.msg === "User has been succesfully registered.") {
-        history.push("/login");
+      auth.updateToken("Bearer" + data.token);
+      if (data.msg === "User has been successfully registered") {
+        history.push("/");
       } else {
-        setNotification(data.msg);
+        return setNotification(data.msg || "Error");
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => setNotification(err.message));
 }
 
 function Register() {
+  const auth = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -37,7 +37,7 @@ function Register() {
         <S.Form
           onSubmit={(e) => {
             e.preventDefault();
-            registerUser(username, password, history, setNotification);
+            registerUser(username, password, auth, history, setNotification);
           }}
         >
           <S.Title>Register</S.Title>
