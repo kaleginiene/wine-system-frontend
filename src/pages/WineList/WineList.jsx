@@ -10,7 +10,7 @@ function deleteWine(quantity, id, auth, setNotification) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${auth.token}`,
+        Authorization: `${auth.token}`,
       },
       body: JSON.stringify({
         quantity,
@@ -201,8 +201,6 @@ function WineList() {
   const [removableWine, setRemovableWine] = useState({ id: null, name: "" });
   const [confirmation, setConfirm] = useState("cancel");
   const [hideBlock, setHideBlock] = useState("hide");
-  console.log(confirmation);
-  console.log(removableWine);
 
   useEffect(() => {
     fetch("http://89.40.0.145:8080/wine-list", {

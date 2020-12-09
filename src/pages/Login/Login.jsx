@@ -12,8 +12,9 @@ function loginUser(username, password, auth, history, setNotification) {
     },
     body: JSON.stringify({ username, password }),
   })
+    .then((res) => res.json())
     .then((data) => {
-      auth.updateToken("Bearer" + data.token);
+      auth.updateToken("Bearer " + data.token);
       if (data.msg === "Logged in") {
         history.push("/");
       } else {
