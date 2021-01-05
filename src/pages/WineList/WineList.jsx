@@ -6,7 +6,7 @@ import MinusIcon from "../../assets/minus.svg";
 
 function deleteWine(quantity, id, auth, setNotification) {
   if (quantity > 0) {
-    fetch("http://89.40.0.145:8080/decrease", {
+    fetch("https://89.40.0.145:8080/decrease", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +30,7 @@ function deleteWine(quantity, id, auth, setNotification) {
 }
 function deleteFromDB(removableWine, auth, setNotification, confirmation) {
   if (confirmation === "delete") {
-    fetch("http://89.40.0.145:8080/delete", {
+    fetch("https://89.40.0.145:8080/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

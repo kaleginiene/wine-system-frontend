@@ -14,11 +14,11 @@ function insertWine(
   setNotification,
   history
 ) {
-  fetch("http://89.40.0.145:8080/add-wine", {
+  fetch("https://89.40.0.145:8080/add-wine", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${auth.token}`,
+      Authorization: `Bearer ${auth.token}`,
     },
     body: JSON.stringify({ name, region, type, year, quantity }),
   })
